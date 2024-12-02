@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const StoredProcedureTemplate = ({ title, procedureName, parameters, onSubmit, onCancel }) => {
+const StoredProcedureTemplate = ({ title, procedureName, parameters, onSubmit, onCancel, buttonText = "Submit" }) => {
   const initialState = parameters.reduce((acc, param) => {
-    acc[param.name] = "";
+    acc[param.name] = param.defaultValue || "";
     return acc;
   }, {});
   const [formData, setFormData] = useState(initialState);
@@ -25,19 +25,42 @@ const StoredProcedureTemplate = ({ title, procedureName, parameters, onSubmit, o
           {parameters.map((param, index) => (
             <div key={index}>
               <label>{param.name}</label>
-              <input
-                type={param.type || "text"}
-                name={param.name}
-                placeholder={param.placeholder || param.name}
-                value={formData[param.name]}
-                onChange={handleChange}
-                style={{
-                  padding: "10px",
-                  fontSize: "16px",
-                  width: "100%",
-                  marginTop: "5px",
-                }}
-              />
+              {param.dropdownOptions ? (
+                <select
+                  name={param.name}
+                  value={formData[param.name]}
+                  onChange={handleChange}
+                  required={param.required}
+                  style={{
+                    padding: "10px",
+                    fontSize: "16px",
+                    width: "100%",
+                    marginTop: "5px",
+                  }}
+                >
+                  <option value="">Select an option</option>
+                  {param.dropdownOptions.map((option, idx) => (
+                    <option key={idx} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  type={param.type || "text"}
+                  name={param.name}
+                  placeholder={param.placeholder || param.name}
+                  value={formData[param.name]}
+                  onChange={handleChange}
+                  required={param.required}
+                  style={{
+                    padding: "10px",
+                    fontSize: "16px",
+                    width: "100%",
+                    marginTop: "5px",
+                  }}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -64,7 +87,7 @@ const StoredProcedureTemplate = ({ title, procedureName, parameters, onSubmit, o
               cursor: "pointer",
             }}
           >
-            Submit
+            {buttonText}
           </button>
         </div>
       </form>
