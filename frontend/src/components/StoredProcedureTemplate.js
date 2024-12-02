@@ -1,25 +1,47 @@
 import React, { useState } from "react";
+import { executeProcedure } from "../utils/api"; // Import API call function
 
-const StoredProcedureTemplate = ({ title, procedureName, parameters, onSubmit, onCancel, buttonText = "Submit" }) => {
+const StoredProcedureTemplate = ({
+  title,
+  procedureName,
+  parameters,
+  onCancel,
+  buttonText = "Submit",
+}) => {
   const initialState = parameters.reduce((acc, param) => {
     acc[param.name] = param.defaultValue || "";
     return acc;
   }, {});
   const [formData, setFormData] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(procedureName, formData); // Pass data to parent
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const result = await executeProcedure(procedureName, Object.values(formData));
+      console.log("Procedure executed successfully:", result);
+      onCancel(); // Navigate back to the dashboard
+    } catch (err) {
+      console.error("Error executing procedure:", err);
+      setError("Failed to execute procedure. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
       <h2>Procedure: {title}</h2>
+      {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
       <form onSubmit={handleSubmit}>
         <div style={{ display: "grid", gap: "10px" }}>
           {parameters.map((param, index) => (
@@ -79,15 +101,16 @@ const StoredProcedureTemplate = ({ title, procedureName, parameters, onSubmit, o
           </button>
           <button
             type="submit"
+            disabled={isLoading}
             style={{
               padding: "10px 20px",
-              backgroundColor: "#007bff",
+              backgroundColor: isLoading ? "#aaa" : "#007bff",
               color: "#fff",
               border: "none",
               cursor: "pointer",
             }}
           >
-            {buttonText}
+            {isLoading ? "Submitting..." : buttonText}
           </button>
         </div>
       </form>

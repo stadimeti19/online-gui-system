@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import Dashboard from "./pages/Dashboard"; // Updated import
+import Dashboard from "./pages/Dashboard";
 import StoredProcedureTemplate from "./components/StoredProcedureTemplate";
 import ViewTemplate from "./components/ViewTemplate";
+import { fetchViewData, executeProcedure } from "./utils/api";
 
 const App = () => {
-  const [screen, setScreen] = useState("menu"); // Tracks the current screen
+  const [screen, setScreen] = useState("menu"); // Tracks current screen
   const [selectedProcedure, setSelectedProcedure] = useState(null);
   const [selectedView, setSelectedView] = useState(null);
   const [viewData, setViewData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const procedures = [
     { title: "Add Owner", procedureName: "add_owner", parameters: [
@@ -205,9 +208,7 @@ const App = () => {
       parameters: [
         { name: "username", placeholder: "Select username", dropdownOptions: ["awilson5", "option2", "option3"] },
       ],
-    },
-
-    // Additional procedures go here...
+    }
 ];
 
   const views = [
@@ -237,30 +238,49 @@ const App = () => {
     }
   ];
 
-  const handleProcedureSubmit = (procedureName, formData) => {
-    console.log(`Executing procedure: ${procedureName}`, formData);
-    setScreen("menu"); // Navigate back to the dashboard
+  const handleProcedureSubmit = async (procedureName, formData) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const result = await executeProcedure(procedureName, Object.values(formData));
+      console.log("Procedure executed successfully:", result);
+      setScreen("menu");
+    } catch (err) {
+      console.error("Error executing procedure:", err);
+      setError("Failed to execute procedure. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleViewSelect = (view) => {
-    console.log(`Fetching view data for: ${view.title}`);
-    setViewData([
-      {
-        username: "awilson5",
-        first_name: "Aaron",
-        last_name: "Wilson",
-        birthdate: "1963-11-11",
-        address: "220 Peachtree Street",
-      },
-    ]);
-    setSelectedView(view);
-    setScreen("view");
+  const handleViewSelect = async (view) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const data = await fetchViewData(view.title.replace(" ", "_").toLowerCase()); // Format view name
+      setViewData(data);
+      setSelectedView(view);
+      setScreen("view");
+    } catch (err) {
+      console.error("Error fetching view data:", err);
+      setError("Failed to fetch view data. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const goBackToDashboard = () => setScreen("menu"); // Helper function to navigate back
+  const goBackToDashboard = () => {
+    setScreen("menu");
+    setError(null); // Clear any errors
+  };
 
   return (
     <div>
+      {isLoading && <div>Loading...</div>}
+      {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
+
       {screen === "menu" && (
         <Dashboard
           procedures={procedures}
@@ -272,22 +292,24 @@ const App = () => {
           onViewSelect={handleViewSelect}
         />
       )}
+
       {screen === "procedure" && selectedProcedure && (
         <StoredProcedureTemplate
           title={selectedProcedure.title}
           procedureName={selectedProcedure.procedureName}
           parameters={selectedProcedure.parameters}
-          buttonText={selectedProcedure.buttonText || "Submit"} 
+          buttonText={selectedProcedure.buttonText || "Submit"}
           onSubmit={handleProcedureSubmit}
-          onCancel={goBackToDashboard} // Pass goBack function to cancel
+          onCancel={goBackToDashboard}
         />
       )}
+
       {screen === "view" && selectedView && (
         <ViewTemplate
           title={selectedView.title}
           columns={selectedView.columns}
           data={viewData}
-          onBack={goBackToDashboard} // Pass goBack function to the back button
+          onBack={goBackToDashboard}
         />
       )}
     </div>
