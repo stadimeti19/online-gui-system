@@ -11,10 +11,11 @@ const Dashboard = ({ procedures, views, onProcedureSelect, onViewSelect }) => {
           style={{
             padding: "10px 20px",
             margin: "10px",
-            backgroundColor: "#333",
+            backgroundImage: "linear-gradient(45deg, #6a11cb, #2575fc)",
             color: "#fff",
             border: "none",
             cursor: "pointer",
+            borderRadius: "5px", // Optional for rounded corners
           }}
           onClick={() => onProcedureSelect(proc)}
         >
@@ -28,10 +29,11 @@ const Dashboard = ({ procedures, views, onProcedureSelect, onViewSelect }) => {
           style={{
             padding: "10px 20px",
             margin: "10px",
-            backgroundColor: "#333",
+            backgroundImage: "linear-gradient(45deg, #6a11cb, #2575fc)",
             color: "#fff",
             border: "none",
             cursor: "pointer",
+            borderRadius: "5px", // Optional for rounded corners
           }}
           onClick={() => onViewSelect(view)}
         >

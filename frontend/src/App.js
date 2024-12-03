@@ -213,28 +213,28 @@ const App = () => {
 
   const views = [
     {
-      title: "Owner Details",
-      columns: ["username", "first_name", "last_name", "birthdate", "address"],
+      title: "Display_Owner_View",
+      columns: ["username", "first_name", "last_name", "address", "numOfBussinesses", "numOfPlaces", "highs", "lows", "debt"],
     },
     {
-      title: "Employee Details",
-      columns: ["username", "taxID", "salary", "hired", "Employee_experience", "licenseID", "Driving_experience", "manager_status"],
+      title: "Display_Employee_View",
+      columns: ["username", "taxID", "salary", "hired", "experience", "licenseIdentifier", "drivingExperience", "manager_status"],
     },
     {
-      title: "Driver Details",
-      columns: ["username", "licenseID", "successful_trips", "num_vans"]
+      title: "Display_Driver_View",
+      columns: ["username", "licenseID", "successful_trips", "numOfVans"]
     },
     {
-      title: "Location Details",
+      title: "Display_Location_View",
       columns: ["label", "long_name", "x_coord", "y_coord", "space", "num_vans", "van_ids", "remaining_capacity"]
     },
     {
-      title: "Product Details",
+      title: "Display_Product_View",
       columns: ["product_name", "location", "amount_available", "low_price", "high_price"]
     },
     {
-      title: "Service Details",
-      columns: ["id", "Long_name", "Home_base", "Manager", "Revenue", "Products_carried", "Cost_carried", "Weight_carried"]
+      title: "Display_Service_View",
+      columns: ["id", "long_name", "home_base", "manager", "revenue", "products_carried", "cost_carried", "weight_carried"]
     }
   ];
 
@@ -259,7 +259,7 @@ const App = () => {
     setError(null);
 
     try {
-      const data = await fetchViewData(view.title.replace(" ", "_").toLowerCase()); // Format view name
+      const data = await fetchViewData(view.title.replaceAll(" ", "_").toLowerCase()); // Format view name
       setViewData(data);
       setSelectedView(view);
       setScreen("view");

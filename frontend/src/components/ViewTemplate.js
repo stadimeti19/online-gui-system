@@ -68,7 +68,10 @@ const ViewTemplate = ({ title, columns, onBack }) => {
                     key={colIndex}
                     style={{ border: "1px solid black", padding: "8px" }}
                   >
-                    {row[col]}
+                    {/* Format the 'hired' date if it exists */}
+                    {col === "hired" && row[col]
+                      ? new Date(row[col]).toISOString().split("T")[0] // Formats to YYYY-MM-DD
+                      : row[col]}
                   </td>
                 ))}
               </tr>
