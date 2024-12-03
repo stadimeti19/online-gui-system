@@ -14,47 +14,50 @@ const App = () => {
 
   const procedures = [
     { title: "Add Owner", procedureName: "add_owner", parameters: [
-        { name: "username", placeholder: "Enter username" },
-        { name: "first_name", placeholder: "Enter first name" },
-        { name: "last_name", placeholder: "Enter last name" },
-        { name: "address", placeholder: "Enter address" },
-        { name: "birthdate", placeholder: "Enter birthdate", type: "date" }
+        { name: "ip_username", placeholder: "Enter username" },
+        { name: "ip_first_name", placeholder: "Enter first name" },
+        { name: "ip_last_name", placeholder: "Enter last name" },
+        { name: "ip_address", placeholder: "Enter address" },
+        { name: "ip_birthdate", placeholder: "Enter birthdate", type: "date" }
     ] },
     { title: "Add Employee", procedureName: "add_employee", parameters: [
-        { name: "first_name", placeholder: "Enter first name" },
-        { name: "last_name", placeholder: "Enter last name" },
-        { name: "username", placeholder: "Enter username" },
-        { name: "address", placeholder: "Enter address" },
-        { name: "birthdate", placeholder: "Enter birthdate", type: "date" },
-        { name: "taxID", placeholder: "Enter tax ID" },
-        { name: "hired_date", placeholder: "Enter hire date", type: "date" },
-        { name: "salary", placeholder: "Enter salary" },
-        { name: "experience", placeholder: "Enter experience (years)" }
+        { name: "ip_username", placeholder: "Enter username" },
+        { name: "ip_first_name", placeholder: "Enter first name" },
+        { name: "ip_last_name", placeholder: "Enter last name" },
+        { name: "ip_address", placeholder: "Enter address" },
+        { name: "ip_birthdate", placeholder: "Enter birthdate", type: "date" },
+        { name: "ip_taxID", placeholder: "Enter tax ID" },
+        { name: "ip_hired", placeholder: "Enter hire date", type: "date" },
+        { name: "ip_employee_experience", placeholder: "Enter experience (years)" },
+        { name: "ip_salary", placeholder: "Enter salary" }
     ] },
     { title: "Add Driver Role", procedureName: "add_driver_role", parameters: [
-        { name: "licenseID", placeholder: "Enter license ID" },
-        { name: "username", placeholder: "Enter username" },
-        { name: "license_type", placeholder: "Enter license type" },
-        { name: "driver_experience", placeholder: "Enter driver experience (years)" }
+        { name: "ip_username", placeholder: "Enter username" },
+        { name: "ip_licenseID", placeholder: "Enter license ID" },
+        { name: "ip_license_type", placeholder: "Enter license type" },
+        { name: "ip_driver_experience", placeholder: "Enter driver experience (years)" }
+    ] },
+    { title: "Add Worker Role", procedureName: "add_worker_role", parameters: [
+      { name: "ip_username", placeholder: "Enter username" }
     ] },
     {
       title: "Add Product",
       procedureName: "add_product",
       parameters: [
-        { name: "barcode", placeholder: "Enter barcode" },
-        { name: "name", placeholder: "Enter product name" },
-        { name: "weight", placeholder: "Enter weight", type: "number" },
+        { name: "ip_barcode", placeholder: "Enter barcode" },
+        { name: "ip_name", placeholder: "Enter product name" },
+        { name: "ip_weight", placeholder: "Enter weight", type: "number" },
       ],
     },
     {
       title: "Add Van",
       procedureName: "add_van",
       parameters: [
-        { name: "ID", placeholder: "Enter van ID", dropdownOptions: ["lcc", "van1", "van2", "van3"] },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "fuel", placeholder: "Enter fuel amount",  type: "number" },
-        { name: "capacity", placeholder: "Enter capacity", type: "number" },
-        { name: "sales", placeholder: "Enter sales", type: "number" },
+        { name: "ip_id", placeholder: "Enter van ID", dropdownOptions: ["lcc", "van1", "van2", "van3"] },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_fuel", placeholder: "Enter fuel amount",  type: "number" },
+        { name: "ip_capacity", placeholder: "Enter capacity", type: "number" },
+        { name: "ip_sales", placeholder: "Enter sales", type: "number" },
         { 
           name: "driven_by", 
           placeholder: "Select driver",  
@@ -66,30 +69,30 @@ const App = () => {
       title: "Add Business",
       procedureName: "add_business",
       parameters: [
-        { name: "long_name", placeholder: "Enter long_name" },
-        { name: "rating", placeholder: "Enter rating", type: "number" },
-        { name: "spent", placeholder: "Enter spent amount",  type: "number" },
-        { name: "location", placeholder: "Enter location" },
+        { name: "ip_long_name", placeholder: "Enter long_name" },
+        { name: "ip_rating", placeholder: "Enter rating", type: "number" },
+        { name: "ip_spent", placeholder: "Enter spent amount",  type: "number" },
+        { name: "ip_location", placeholder: "Enter location" },
       ],
     },
     {
       title: "Add Service",
       procedureName: "add_service",
       parameters: [
-        { name: "id", placeholder: "Enter id" },
-        { name: "long_name", placeholder: "Enter long_name" },
-        { name: "home_base", placeholder: "Enter home_base" },
-        { name: "manager", placeholder: "Enter manager" },
+        { name: "ip_id", placeholder: "Enter id" },
+        { name: "ip_long_name", placeholder: "Enter long_name" },
+        { name: "ip_home_base", placeholder: "Enter home_base" },
+        { name: "ip_manager", placeholder: "Enter manager" },
       ],
     },
     {
       title: "Add Location",
       procedureName: "add_location",
       parameters: [
-        { name: "label", placeholder: "Enter label" },
-        { name: "y_coord", placeholder: "Enter x_coord", type: "number"},
-        { name: "x_coord", placeholder: "Enter y_coord", type: "number" },
-        { name: "space", placeholder: "Enter space" , type: "number"},
+        { name: "ip_label", placeholder: "Enter label" },
+        { name: "ip_x_coord", placeholder: "Enter y_coord", type: "number" },
+        { name: "ip_y_coord", placeholder: "Enter x_coord", type: "number"}, 
+        { name: "ip_space", placeholder: "Enter space" , type: "number"},
       ],
     },
     {
@@ -126,8 +129,8 @@ const App = () => {
       procedureName: "manage_services",
       buttonText: "Begin",
       parameters: [
-        { name: "username", placeholder: "Enter username" },
-        { name: "ID", placeholder: "Enter ID" },
+        { name: "ip_username", placeholder: "Enter username" },
+        { name: "ip_id", placeholder: "Enter ID" },
       ],
     },
     {
@@ -135,9 +138,9 @@ const App = () => {
       procedureName: "takeover_van",
       buttonText: "Add",
       parameters: [
-        { name: "username", placeholder: "Select username", dropdownOptions: ["awilson5", "option2", "option3"] },
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["lcc", "option2", "option3"] },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_username", placeholder: "Select username", dropdownOptions: ["awilson5", "option2", "option3"] },
+        { name: "ip_id", placeholder: "Select ID", dropdownOptions: ["lcc", "option2", "option3"] },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
       ],
     },
     {
@@ -145,11 +148,11 @@ const App = () => {
       procedureName: "load_van",
       buttonText: "Deliver",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
-        { name: "barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "num of packages", placeholder: "enter number of packages", type: "number"},
-        { name: "price", placeholder: "enter price", type: "number"}
+        { name: "ip_id", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
+        { name: "ip_more_packages", placeholder: "enter number of packages", type: "number"},
+        { name: "ip_price", placeholder: "enter price", type: "number"}
       ],
     },
     {
@@ -157,9 +160,9 @@ const App = () => {
       procedureName: "refuel_van",
       buttonText: "Refuel",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "More Fuel", placeholder: "enter Fuel Added", type: "number"}
+        { name: "ip_id", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_more_fuel", placeholder: "enter Fuel Added", type: "number"}
       ],
     },
     {
@@ -167,9 +170,9 @@ const App = () => {
       procedureName: "drive_van",
       buttonText: "Drive",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "Destination", placeholder: "enter Destination" }
+        { name: "ip_id", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_destination", placeholder: "enter Destination" }
       ],
     },
     {
@@ -177,11 +180,11 @@ const App = () => {
       procedureName: "purchase_product",
       buttonText: "Purchase",
       parameters: [
-        { name: "Long Name", placeholder: "Select Long Name", dropdownOptions: ["Prime Solutions", "option2", "option3"] },
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
-        { name: "Tag", placeholder: "Enter tag", type: "number" },
-        { name: "Barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
-        { name: "Quantity", placeholder: "enter Product Quantity", type: "number"}
+        { name: "ip_long_name", placeholder: "Select Long Name", dropdownOptions: ["Prime Solutions", "option2", "option3"] },
+        { name: "ip_id", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
+        { name: "ip_quantity", placeholder: "enter Product Quantity", type: "number"}
       ],
     },
     {
@@ -189,7 +192,7 @@ const App = () => {
       procedureName: "remove_product",
       buttonText: "Remove",
       parameters: [
-        { name: "Barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
+        { name: "ip_barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
       ],
     },
     {
@@ -197,8 +200,8 @@ const App = () => {
       procedureName: "remove_van",
       buttonText: "Remove",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["pub", "option2", "option3"] },
-        { name: "Tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_id", placeholder: "Select ID", dropdownOptions: ["pub", "option2", "option3"] },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
       ],
     },
     {
@@ -206,7 +209,7 @@ const App = () => {
       procedureName: "remove_driver_role",
       buttonText: "Remove",
       parameters: [
-        { name: "username", placeholder: "Select username", dropdownOptions: ["awilson5", "option2", "option3"] },
+        { name: "ip_username", placeholder: "Select username", dropdownOptions: ["awilson5", "option2", "option3"] },
       ],
     }
 ];
