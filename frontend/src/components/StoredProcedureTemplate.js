@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { executeProcedure } from "../utils/api"; // Import API call function
+// components/StoredProcedureTemplate.js
+import React, { useState, useEffect } from "react";
+import { executeProcedure, fetchOptions } from "../utils/api";
 
 const StoredProcedureTemplate = ({
   title,
@@ -12,9 +13,35 @@ const StoredProcedureTemplate = ({
     acc[param.name] = param.defaultValue || "";
     return acc;
   }, {});
+
   const [formData, setFormData] = useState(initialState);
+  const [updatedParameters, setUpdatedParameters] = useState(parameters); 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+
+    const fetchAllOptions = async () => {
+      const newParameters = await Promise.all(
+        parameters.map(async (param) => {
+          if (param.fetchOptions) {
+            try {
+              const options = await fetchOptions(param.fetchOptions);
+              return { ...param, dropdownOptions: options };
+            } catch (err) {
+              console.error(`Error fetching options for ${param.name}:`, err);
+              return param;
+            }
+          } else {
+            return param;
+          }
+        })
+      );
+      setUpdatedParameters(newParameters);
+    };
+
+    fetchAllOptions();
+  }, [parameters]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +56,7 @@ const StoredProcedureTemplate = ({
     try {
       const result = await executeProcedure(procedureName, Object.values(formData));
       console.log("Procedure executed successfully:", result);
-      onCancel(); // Navigate back to the dashboard
+      onCancel();
     } catch (err) {
       console.error("Error executing procedure:", err);
       setError("Failed to execute procedure. Please try again.");
@@ -44,7 +71,7 @@ const StoredProcedureTemplate = ({
       {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
       <form onSubmit={handleSubmit}>
         <div style={{ display: "grid", gap: "10px" }}>
-          {parameters.map((param, index) => (
+          {updatedParameters.map((param, index) => (
             <div key={index}>
               <label>{param.name}</label>
               {param.dropdownOptions ? (
@@ -62,8 +89,8 @@ const StoredProcedureTemplate = ({
                 >
                   <option value="">Select an option</option>
                   {param.dropdownOptions.map((option, idx) => (
-                    <option key={idx} value={option}>
-                      {option}
+                    <option key={idx} value={option.value || option}>
+                      {option.label || option}
                     </option>
                   ))}
                 </select>

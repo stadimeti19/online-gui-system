@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useState } from "react";
 import Dashboard from "./pages/Dashboard";
 import StoredProcedureTemplate from "./components/StoredProcedureTemplate";
@@ -5,7 +7,7 @@ import ViewTemplate from "./components/ViewTemplate";
 import { fetchViewData, executeProcedure } from "./utils/api";
 
 const App = () => {
-  const [screen, setScreen] = useState("menu"); // Tracks current screen
+  const [screen, setScreen] = useState("menu");
   const [selectedProcedure, setSelectedProcedure] = useState(null);
   const [selectedView, setSelectedView] = useState(null);
   const [viewData, setViewData] = useState([]);
@@ -55,10 +57,15 @@ const App = () => {
         { name: "fuel", placeholder: "Enter fuel amount",  type: "number" },
         { name: "capacity", placeholder: "Enter capacity", type: "number" },
         { name: "sales", placeholder: "Enter sales", type: "number" },
-        { 
-          name: "driven_by", 
-          placeholder: "Select driver",  
-          dropdownOptions: ["awilson5", "other_driver1", "other_driver2"] 
+        {
+          name: "driven_by",
+          placeholder: "Select driver",
+          fetchOptions: "/options/drivers",
+        },
+        {
+          name: "located_at",
+          placeholder: "Select location",
+          fetchOptions: "/options/locations",
         },
       ],
     },
@@ -66,20 +73,32 @@ const App = () => {
       title: "Add Business",
       procedureName: "add_business",
       parameters: [
-        { name: "long_name", placeholder: "Enter long_name" },
+        { name: "long_name", placeholder: "Enter long name" },
         { name: "rating", placeholder: "Enter rating", type: "number" },
-        { name: "spent", placeholder: "Enter spent amount",  type: "number" },
-        { name: "location", placeholder: "Enter location" },
+        { name: "spent", placeholder: "Enter spent amount", type: "number" },
+        {
+          name: "location",
+          placeholder: "Select location",
+          fetchOptions: "/options/locations",
+        },
       ],
     },
     {
       title: "Add Service",
       procedureName: "add_service",
       parameters: [
-        { name: "id", placeholder: "Enter id" },
-        { name: "long_name", placeholder: "Enter long_name" },
-        { name: "home_base", placeholder: "Enter home_base" },
-        { name: "manager", placeholder: "Enter manager" },
+        { name: "id", placeholder: "Enter service ID" },
+        { name: "long_name", placeholder: "Enter long name" },
+        {
+          name: "home_base",
+          placeholder: "Select home base",
+          fetchOptions: "/options/locations",
+        },
+        {
+          name: "manager",
+          placeholder: "Select manager",
+          fetchOptions: "/options/workers",
+        },
       ],
     },
     {
@@ -87,9 +106,9 @@ const App = () => {
       procedureName: "add_location",
       parameters: [
         { name: "label", placeholder: "Enter label" },
-        { name: "y_coord", placeholder: "Enter x_coord", type: "number"},
-        { name: "x_coord", placeholder: "Enter y_coord", type: "number" },
-        { name: "space", placeholder: "Enter space" , type: "number"},
+        { name: "x_coord", placeholder: "Enter x_coord", type: "number" },
+        { name: "y_coord", placeholder: "Enter y_coord", type: "number" },
+        { name: "space", placeholder: "Enter space", type: "number" },
       ],
     },
     {
@@ -97,10 +116,26 @@ const App = () => {
       procedureName: "start_funding",
       buttonText: "Fund",
       parameters: [
-        { name: "ip_owner", placeholder: "Select ip_owner", dropdownOptions: ["cjordan5", "van1", "van2", "van3"] },
-        { name: "ip_amount", placeholder: "Enter ip_amount", type: "number"},
-        { name: "ip_long_name", placeholder: "Select ip_long_name", dropdownOptions: ["Innovation Ventures", "option1", "option2"]},
-        { name: "ip_fund_date", placeholder: "Select ip_fund_date" ,  type: "date"},
+        {
+          name: "username",
+          placeholder: "Select owner",
+          fetchOptions: "/options/owners",
+        },
+        {
+          name: "invested",
+          placeholder: "Enter invested amount",
+          type: "number",
+        },
+        {
+          name: "invested_date",
+          placeholder: "Select invested date",
+          type: "date",
+        },
+        {
+          name: "business",
+          placeholder: "Select business",
+          fetchOptions: "/options/businesses",
+        },
       ],
     },
     {
@@ -108,8 +143,16 @@ const App = () => {
       procedureName: "hire_employee",
       buttonText: "Hire",
       parameters: [
-        { name: "ip_username", placeholder: "Enter ip_username" },
-        { name: "ip_id", placeholder: "Enter ip_id" },
+        {
+          name: "username",
+          placeholder: "Select employee",
+          fetchOptions: "/options/employees",
+        },
+        {
+          name: "id",
+          placeholder: "Select service",
+          fetchOptions: "/options/services",
+        },
       ],
     },
     {
@@ -117,8 +160,16 @@ const App = () => {
       procedureName: "fire_employee",
       buttonText: "Remove",
       parameters: [
-        { name: "ip_username", placeholder: "Enter ip_username" },
-        { name: "ip_id", placeholder: "Enter ip_id" },
+        {
+          name: "username",
+          placeholder: "Select employee",
+          fetchOptions: "/options/employees",
+        },
+        {
+          name: "id",
+          placeholder: "Select service",
+          fetchOptions: "/options/services",
+        },
       ],
     },
     {
@@ -126,8 +177,16 @@ const App = () => {
       procedureName: "manage_services",
       buttonText: "Begin",
       parameters: [
-        { name: "username", placeholder: "Enter username" },
-        { name: "ID", placeholder: "Enter ID" },
+        {
+          name: "username",
+          placeholder: "Select worker",
+          fetchOptions: "/options/workers",
+        },
+        {
+          name: "id",
+          placeholder: "Select service",
+          fetchOptions: "/options/services",
+        },
       ],
     },
     {
@@ -135,8 +194,16 @@ const App = () => {
       procedureName: "takeover_van",
       buttonText: "Add",
       parameters: [
-        { name: "username", placeholder: "Select username", dropdownOptions: ["awilson5", "option2", "option3"] },
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["lcc", "option2", "option3"] },
+        {
+          name: "username",
+          placeholder: "Select driver",
+          fetchOptions: "/options/drivers",
+        },
+        {
+          name: "id",
+          placeholder: "Select van ID",
+          fetchOptions: "/options/vans",
+        },
         { name: "tag", placeholder: "Enter tag", type: "number" },
       ],
     },
@@ -145,11 +212,19 @@ const App = () => {
       procedureName: "load_van",
       buttonText: "Deliver",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
-        { name: "barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
+        {
+          name: "id",
+          placeholder: "Select van ID",
+          fetchOptions: "/options/vans",
+        },
         { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "num of packages", placeholder: "enter number of packages", type: "number"},
-        { name: "price", placeholder: "enter price", type: "number"}
+        {
+          name: "barcode",
+          placeholder: "Select product",
+          fetchOptions: "/options/products",
+        },
+        { name: "quantity", placeholder: "Enter quantity", type: "number" },
+        { name: "price", placeholder: "Enter price", type: "number" },
       ],
     },
     {
@@ -157,9 +232,13 @@ const App = () => {
       procedureName: "refuel_van",
       buttonText: "Refuel",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
+        {
+          name: "id",
+          placeholder: "Select van ID",
+          fetchOptions: "/options/vans",
+        },
         { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "More Fuel", placeholder: "enter Fuel Added", type: "number"}
+        { name: "fuel", placeholder: "Enter fuel added", type: "number" },
       ],
     },
     {
@@ -167,9 +246,13 @@ const App = () => {
       procedureName: "drive_van",
       buttonText: "Drive",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
+        {
+          name: "id",
+          placeholder: "Select van ID",
+          fetchOptions: "/options/vans",
+        },
         { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "Destination", placeholder: "enter Destination" }
+        { name: "destination", placeholder: "Enter destination" },
       ],
     },
     {
@@ -177,11 +260,23 @@ const App = () => {
       procedureName: "purchase_product",
       buttonText: "Purchase",
       parameters: [
-        { name: "Long Name", placeholder: "Select Long Name", dropdownOptions: ["Prime Solutions", "option2", "option3"] },
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["mbm", "option2", "option3"] },
-        { name: "Tag", placeholder: "Enter tag", type: "number" },
-        { name: "Barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
-        { name: "Quantity", placeholder: "enter Product Quantity", type: "number"}
+        {
+          name: "business",
+          placeholder: "Select business",
+          fetchOptions: "/options/businesses",
+        },
+        {
+          name: "id",
+          placeholder: "Select van ID",
+          fetchOptions: "/options/vans",
+        },
+        { name: "tag", placeholder: "Enter tag", type: "number" },
+        {
+          name: "barcode",
+          placeholder: "Select product",
+          fetchOptions: "/options/products",
+        },
+        { name: "quantity", placeholder: "Enter product quantity", type: "number" },
       ],
     },
     {
@@ -189,7 +284,11 @@ const App = () => {
       procedureName: "remove_product",
       buttonText: "Remove",
       parameters: [
-        { name: "Barcode", placeholder: "Select barcode", dropdownOptions: ["hm_5ELR", "option2", "option3"] },
+        {
+          name: "barcode",
+          placeholder: "Select product",
+          fetchOptions: "/options/products",
+        },
       ],
     },
     {
@@ -197,8 +296,12 @@ const App = () => {
       procedureName: "remove_van",
       buttonText: "Remove",
       parameters: [
-        { name: "ID", placeholder: "Select ID", dropdownOptions: ["pub", "option2", "option3"] },
-        { name: "Tag", placeholder: "Enter tag", type: "number" },
+        {
+          name: "id",
+          placeholder: "Select van ID",
+          fetchOptions: "/options/vans",
+        },
+        { name: "tag", placeholder: "Enter tag", type: "number" },
       ],
     },
     {
@@ -206,10 +309,14 @@ const App = () => {
       procedureName: "remove_driver_role",
       buttonText: "Remove",
       parameters: [
-        { name: "username", placeholder: "Select username", dropdownOptions: ["awilson5", "option2", "option3"] },
+        {
+          name: "username",
+          placeholder: "Select driver",
+          fetchOptions: "/options/drivers",
+        },
       ],
-    }
-];
+    },
+  ];
 
   const views = [
     {
@@ -218,7 +325,16 @@ const App = () => {
     },
     {
       title: "Display_Employee_View",
-      columns: ["username", "taxID", "salary", "hired", "experience", "licenseIdentifier", "drivingExperience", "manager_status"],
+      columns: [
+        "username",
+        "taxID",
+        "salary",
+        "hired",
+        "experience",
+        "licenseIdentifier",
+        "drivingExperience",
+        "manager_status",
+      ],
     },
     {
       title: "Display_Driver_View",
@@ -273,7 +389,7 @@ const App = () => {
 
   const goBackToDashboard = () => {
     setScreen("menu");
-    setError(null); // Clear any errors
+    setError(null);
   };
 
   return (
@@ -299,7 +415,6 @@ const App = () => {
           procedureName={selectedProcedure.procedureName}
           parameters={selectedProcedure.parameters}
           buttonText={selectedProcedure.buttonText || "Submit"}
-          onSubmit={handleProcedureSubmit}
           onCancel={goBackToDashboard}
         />
       )}

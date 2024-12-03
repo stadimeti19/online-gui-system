@@ -1,3 +1,4 @@
+// utils/api.js
 const API_BASE_URL = "http://localhost:5001/api";
 
 // Execute a stored procedure
@@ -24,4 +25,19 @@ export const fetchViewData = async (viewName) => {
         console.error("Error fetching view data:", err);
         throw err;
     }
+};
+
+
+export const fetchOptions = async (endpoint) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch options");
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error fetching options:", err);
+    throw err;
+  }
 };
