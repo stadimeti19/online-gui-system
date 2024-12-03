@@ -16,36 +16,39 @@ const App = () => {
 
   const procedures = [
     { title: "Add Owner", procedureName: "add_owner", parameters: [
-        { name: "username", placeholder: "Enter username" },
-        { name: "first_name", placeholder: "Enter first name" },
-        { name: "last_name", placeholder: "Enter last name" },
-        { name: "address", placeholder: "Enter address" },
-        { name: "birthdate", placeholder: "Enter birthdate", type: "date" }
+        { name: "ip_username", placeholder: "Enter username" },
+        { name: "ip_first_name", placeholder: "Enter first name" },
+        { name: "ip_last_name", placeholder: "Enter last name" },
+        { name: "ip_address", placeholder: "Enter address" },
+        { name: "ip_birthdate", placeholder: "Enter birthdate", type: "date" }
     ] },
     { title: "Add Employee", procedureName: "add_employee", parameters: [
-        { name: "first_name", placeholder: "Enter first name" },
-        { name: "last_name", placeholder: "Enter last name" },
-        { name: "username", placeholder: "Enter username" },
-        { name: "address", placeholder: "Enter address" },
-        { name: "birthdate", placeholder: "Enter birthdate", type: "date" },
-        { name: "taxID", placeholder: "Enter tax ID" },
-        { name: "hired_date", placeholder: "Enter hire date", type: "date" },
-        { name: "salary", placeholder: "Enter salary" },
-        { name: "experience", placeholder: "Enter experience (years)" }
+        { name: "ip_username", placeholder: "Enter username" },
+        { name: "ip_first_name", placeholder: "Enter first name" },
+        { name: "ip_last_name", placeholder: "Enter last name" },
+        { name: "ip_address", placeholder: "Enter address" },
+        { name: "ip_birthdate", placeholder: "Enter birthdate", type: "date" },
+        { name: "ip_taxID", placeholder: "Enter tax ID" },
+        { name: "ip_hired", placeholder: "Enter hire date", type: "date" },
+        { name: "ip_employee_experience", placeholder: "Enter experience (years)" },
+        { name: "ip_salary", placeholder: "Enter salary" }
     ] },
     { title: "Add Driver Role", procedureName: "add_driver_role", parameters: [
-        { name: "licenseID", placeholder: "Enter license ID" },
-        { name: "username", placeholder: "Enter username" },
-        { name: "license_type", placeholder: "Enter license type" },
-        { name: "driver_experience", placeholder: "Enter driver experience (years)" }
+        { name: "ip_username", placeholder: "Enter username" },
+        { name: "ip_licenseID", placeholder: "Enter license ID" },
+        { name: "ip_license_type", placeholder: "Enter license type" },
+        { name: "ip_driver_experience", placeholder: "Enter driver experience (years)" }
+    ] },
+    { title: "Add Worker Role", procedureName: "add_worker_role", parameters: [
+      { name: "ip_username", placeholder: "Enter username" }
     ] },
     {
       title: "Add Product",
       procedureName: "add_product",
       parameters: [
-        { name: "barcode", placeholder: "Enter barcode" },
-        { name: "name", placeholder: "Enter product name" },
-        { name: "weight", placeholder: "Enter weight", type: "number" },
+        { name: "ip_barcode", placeholder: "Enter barcode" },
+        { name: "ip_name", placeholder: "Enter product name" },
+        { name: "ip_weight", placeholder: "Enter weight", type: "number" },
       ],
     },
     {
