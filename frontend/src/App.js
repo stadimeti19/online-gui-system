@@ -14,9 +14,9 @@ const App = () => {
 
   const procedures = [
     { title: "Add Owner", procedureName: "add_owner", parameters: [
+        { name: "username", placeholder: "Enter username" },
         { name: "first_name", placeholder: "Enter first name" },
         { name: "last_name", placeholder: "Enter last name" },
-        { name: "username", placeholder: "Enter username" },
         { name: "address", placeholder: "Enter address" },
         { name: "birthdate", placeholder: "Enter birthdate", type: "date" }
     ] },
