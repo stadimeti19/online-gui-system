@@ -124,4 +124,16 @@ router.get("/owners", (req, res) => {
   });
 });
 
+router.get("/workers", (req, res) => {
+  const query = "SELECT username FROM workers";
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching workers:", err);
+      return res.status(500).send("Error fetching workers.");
+    }
+    const usernames = results.map((row) => row.username);
+    res.json(usernames);
+  });
+});
+
 module.exports = router;

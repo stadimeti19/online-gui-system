@@ -30,14 +30,14 @@ const App = () => {
         { name: "ip_birthdate", placeholder: "Enter birthdate", type: "date" },
         { name: "ip_taxID", placeholder: "Enter tax ID" },
         { name: "ip_hired", placeholder: "Enter hire date", type: "date" },
-        { name: "ip_employee_experience", placeholder: "Enter experience (years)" },
-        { name: "ip_salary", placeholder: "Enter salary" }
+        { name: "ip_employee_experience", placeholder: "Enter experience (years)", type: "number" },
+        { name: "ip_salary", placeholder: "Enter salary", type: "number" }
     ] },
     { title: "Add Driver Role", procedureName: "add_driver_role", parameters: [
         { name: "ip_username", placeholder: "Enter username" },
         { name: "ip_licenseID", placeholder: "Enter license ID" },
         { name: "ip_license_type", placeholder: "Enter license type" },
-        { name: "ip_driver_experience", placeholder: "Enter driver experience (years)" }
+        { name: "ip_driver_experience", placeholder: "Enter driver experience (years)", type: "number" }
     ] },
     { title: "Add Worker Role", procedureName: "add_worker_role", parameters: [
       { name: "ip_username", placeholder: "Enter username" }
@@ -55,20 +55,14 @@ const App = () => {
       title: "Add Van",
       procedureName: "add_van",
       parameters: [
-        { name: "ID", placeholder: "Enter van ID", dropdownOptions: ["lcc", "van1", "van2", "van3"] },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "fuel", placeholder: "Enter fuel amount",  type: "number" },
-        { name: "capacity", placeholder: "Enter capacity", type: "number" },
-        { name: "sales", placeholder: "Enter sales", type: "number" },
-        {
-          name: "driven_by",
+        { name: "ip_id", placeholder: "Enter van ID", fetchOptions: "/options/vans" },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_fuel", placeholder: "Enter fuel amount",  type: "number" },
+        { name: "ip_capacity", placeholder: "Enter capacity", type: "number" },
+        { name: "ip_sales", placeholder: "Enter sales", type: "number" },
+        { name: "ip_driven_by",
           placeholder: "Select driver",
           fetchOptions: "/options/drivers",
-        },
-        {
-          name: "located_at",
-          placeholder: "Select location",
-          fetchOptions: "/options/locations",
         },
       ],
     },
@@ -76,11 +70,11 @@ const App = () => {
       title: "Add Business",
       procedureName: "add_business",
       parameters: [
-        { name: "long_name", placeholder: "Enter long name" },
-        { name: "rating", placeholder: "Enter rating", type: "number" },
-        { name: "spent", placeholder: "Enter spent amount", type: "number" },
+        { name: "ip_long_name", placeholder: "Enter long name" },
+        { name: "ip_rating", placeholder: "Enter rating", type: "number" },
+        { name: "ip_spent", placeholder: "Enter spent amount", type: "number" },
         {
-          name: "location",
+          name: "ip_location",
           placeholder: "Select location",
           fetchOptions: "/options/locations",
         },
@@ -90,15 +84,15 @@ const App = () => {
       title: "Add Service",
       procedureName: "add_service",
       parameters: [
-        { name: "id", placeholder: "Enter service ID" },
-        { name: "long_name", placeholder: "Enter long name" },
+        { name: "ip_id", placeholder: "Enter service ID" },
+        { name: "ip_long_name", placeholder: "Enter long name" },
         {
-          name: "home_base",
+          name: "ip_home_base",
           placeholder: "Select home base",
           fetchOptions: "/options/locations",
         },
         {
-          name: "manager",
+          name: "ip_manager",
           placeholder: "Select manager",
           fetchOptions: "/options/workers",
         },
@@ -108,10 +102,10 @@ const App = () => {
       title: "Add Location",
       procedureName: "add_location",
       parameters: [
-        { name: "label", placeholder: "Enter label" },
-        { name: "x_coord", placeholder: "Enter x_coord", type: "number" },
-        { name: "y_coord", placeholder: "Enter y_coord", type: "number" },
-        { name: "space", placeholder: "Enter space", type: "number" },
+        { name: "ip_label", placeholder: "Enter label" },
+        { name: "ip_x_coord", placeholder: "Enter x_coord", type: "number" },
+        { name: "ip_y_coord", placeholder: "Enter y_coord", type: "number" },
+        { name: "ip_space", placeholder: "Enter space", type: "number" },
       ],
     },
     {
@@ -120,24 +114,24 @@ const App = () => {
       buttonText: "Fund",
       parameters: [
         {
-          name: "username",
+          name: "ip_owner",
           placeholder: "Select owner",
           fetchOptions: "/options/owners",
         },
         {
-          name: "invested",
+          name: "ip_amount",
           placeholder: "Enter invested amount",
           type: "number",
         },
         {
-          name: "invested_date",
-          placeholder: "Select invested date",
-          type: "date",
-        },
-        {
-          name: "business",
+          name: "ip_long_name",
           placeholder: "Select business",
           fetchOptions: "/options/businesses",
+        },
+        {
+          name: "ip_fund_date",
+          placeholder: "Select invested date",
+          type: "date",
         },
       ],
     },
@@ -147,12 +141,12 @@ const App = () => {
       buttonText: "Hire",
       parameters: [
         {
-          name: "username",
+          name: "ip_username",
           placeholder: "Select employee",
           fetchOptions: "/options/employees",
         },
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select service",
           fetchOptions: "/options/services",
         },
@@ -164,29 +158,29 @@ const App = () => {
       buttonText: "Remove",
       parameters: [
         {
-          name: "username",
+          name: "ip_username",
           placeholder: "Select employee",
           fetchOptions: "/options/employees",
         },
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select service",
           fetchOptions: "/options/services",
         },
       ],
     },
     {
-      title: "Manage Services",
-      procedureName: "manage_services",
+      title: "Manage Service",
+      procedureName: "manage_service",
       buttonText: "Begin",
       parameters: [
         {
-          name: "username",
+          name: "ip_username",
           placeholder: "Select worker",
           fetchOptions: "/options/workers",
         },
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select service",
           fetchOptions: "/options/services",
         },
@@ -198,16 +192,16 @@ const App = () => {
       buttonText: "Add",
       parameters: [
         {
-          name: "username",
+          name: "ip_username",
           placeholder: "Select driver",
           fetchOptions: "/options/drivers",
         },
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select van ID",
           fetchOptions: "/options/vans",
         },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
       ],
     },
     {
@@ -216,18 +210,18 @@ const App = () => {
       buttonText: "Deliver",
       parameters: [
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select van ID",
           fetchOptions: "/options/vans",
         },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
         {
-          name: "barcode",
+          name: "ip_barcode",
           placeholder: "Select product",
           fetchOptions: "/options/products",
         },
-        { name: "quantity", placeholder: "Enter quantity", type: "number" },
-        { name: "price", placeholder: "Enter price", type: "number" },
+        { name: "ip_quantity", placeholder: "Enter quantity", type: "number" },
+        { name: "ip_price", placeholder: "Enter price", type: "number" },
       ],
     },
     {

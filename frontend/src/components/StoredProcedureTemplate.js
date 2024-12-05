@@ -53,10 +53,16 @@ const StoredProcedureTemplate = ({
     setIsLoading(true);
     setError(null);
 
+    // Replace empty strings with null for backend compatibility
+    const sanitizedFormData = {};
+    for (const key in formData) {
+      sanitizedFormData[key] = formData[key] === "" ? null : formData[key];
+    }
+
     try {
-      const result = await executeProcedure(procedureName, Object.values(formData));
+      const result = await executeProcedure(procedureName, Object.values(sanitizedFormData));
       console.log("Procedure executed successfully:", result);
-      onCancel();
+      onCancel(); // Navigate back to dashboard
     } catch (err) {
       console.error("Error executing procedure:", err);
       setError("Failed to execute procedure. Please try again.");
