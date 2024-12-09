@@ -76,7 +76,7 @@ Sashank
 
 Maanas
 - Designed and implemented majority of front-end 
-- Tested and fixed stored procedure/view issues
+* Tested and fixed stored procedure/view issues
 
 Ricky
 - Added dropdown menus for different attributes
