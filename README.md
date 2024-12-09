@@ -68,3 +68,20 @@ Database:
 - MySQL 8.0: For managing data and supporting stored procedures and views.
 
 ## iv. Work Distribution Among Team Members
+
+Sashank
+- Setup GitHub, frontend, backend and MySql db connection
+* Integrated frontend with backend through express api routes
+- Tested and fixed stored procedure/view issues
+
+Maanas
+- Designed and implemented majority of front-end 
+- Tested and fixed stored procedure/view issues
+
+Ricky
+- Added dropdown menus for different attributes
+* Tested and fixed stored procedure/view issues
+
+Rithvik
+- Added phase 3 stored procs and views logic (parameters) to UI
+* Tested and fixed stored procedure/view issues
