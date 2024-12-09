@@ -45,17 +45,14 @@ router.get("/vans/:vanId/tags", (req, res) => {
 
 
 router.get("/products", (req, res) => {
-  const query = "SELECT barcode, iname FROM products";
+  const query = "SELECT barcode FROM products";
   db.query(query, (err, results) => {
     if (err) {
-      console.error("Error fetching products:", err);
-      return res.status(500).send("Error fetching products.");
+      console.error("Error fetching product barcodes:", err);
+      return res.status(500).send("Error fetching product barcodes.");
     }
-    const products = results.map((row) => ({
-      value: row.barcode,
-      label: row.iname,
-    }));
-    res.json(products);
+    const barcodes = results.map((row) => row.barcode);
+    res.json(barcodes);
   });
 });
 

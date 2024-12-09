@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Dashboard from "./pages/Dashboard";
 import StoredProcedureTemplate from "./components/StoredProcedureTemplate";
 import ViewTemplate from "./components/ViewTemplate";
-import { fetchViewData, executeProcedure } from "./utils/api";
+import { fetchViewData, executeProcedure, fetchOptions } from "./utils/api";
 
 const App = () => {
   const [screen, setScreen] = useState("menu");
@@ -244,12 +244,14 @@ const App = () => {
       buttonText: "Drive",
       parameters: [
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select van ID",
           fetchOptions: "/options/vans",
         },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
-        { name: "destination", placeholder: "Enter destination" },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_destination", placeholder: "Enter destination",
+          fetchOptions: "/options/locations"
+         },
       ],
     },
     {
@@ -258,22 +260,22 @@ const App = () => {
       buttonText: "Purchase",
       parameters: [
         {
-          name: "business",
+          name: "ip_long_name",
           placeholder: "Select business",
           fetchOptions: "/options/businesses",
         },
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select van ID",
           fetchOptions: "/options/vans",
         },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
         {
-          name: "barcode",
+          name: "ip_barcode",
           placeholder: "Select product",
           fetchOptions: "/options/products",
         },
-        { name: "quantity", placeholder: "Enter product quantity", type: "number" },
+        { name: "ip_quantity", placeholder: "Enter product quantity", type: "number" },
       ],
     },
     {
@@ -282,7 +284,7 @@ const App = () => {
       buttonText: "Remove",
       parameters: [
         {
-          name: "barcode",
+          name: "ip_barcode",
           placeholder: "Select product",
           fetchOptions: "/options/products",
         },
@@ -294,11 +296,11 @@ const App = () => {
       buttonText: "Remove",
       parameters: [
         {
-          name: "id",
+          name: "ip_id",
           placeholder: "Select van ID",
           fetchOptions: "/options/vans",
         },
-        { name: "tag", placeholder: "Enter tag", type: "number" },
+        { name: "ip_tag", placeholder: "Enter tag", type: "number" },
       ],
     },
     {
@@ -307,7 +309,7 @@ const App = () => {
       buttonText: "Remove",
       parameters: [
         {
-          name: "username",
+          name: "ip_username",
           placeholder: "Select driver",
           fetchOptions: "/options/drivers",
         },
