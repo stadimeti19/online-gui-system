@@ -1,6 +1,6 @@
 # online-gui-system
 
-## i. Instructions to setup your app
+## i. Instructions to setup app
 
 ### Cloning the Repository
 On your local computer, navigate to the directory where you want to clone the repository.
@@ -29,7 +29,7 @@ DB_NAME=business_supply
 ```
 Replace your_password with your MySQL account password.
 
-## ii. Instructions to run your app
+## ii. Instructions to run app
 
 ### Frontend
 Start the React development server:
@@ -70,7 +70,7 @@ Database:
 Together, these technologies work together to create a full-stack application where users can interact with the database
 through an intuitive UI, with backend MySQL integration for executing complex stored procedures, views, and other operations.
 
-## iv. Work Distribution Among Team Members
+## iv. Work distribution among team members
 
 Sashank Tadimeti
 - Setup GitHub, frontend, backend and MySql db connection
