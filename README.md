@@ -65,23 +65,26 @@ Backend:
 + MySQL2: For connecting to the MySQL database and executing SQL queries
 
 Database:
-- MySQL 8.0: For managing data and supporting stored procedures and views.
+- MySQL and MySQL Server: For managing data and supporting stored procedures and views.
+
+Together, these technologies work together to create a full-stack application where users can interact with the database
+through an intuitive UI, with backend MySQL integration for executing complex stored procedures, views, and other operations.
 
 ## iv. Work Distribution Among Team Members
 
-Sashank
+Sashank Tadimeti
 - Setup GitHub, frontend, backend and MySql db connection
 * Integrated frontend with backend through express api routes
 - Tested and fixed stored procedure/view issues
 
-Maanas
+Maanas Baraya
 - Designed and implemented majority of front-end 
 * Tested and fixed stored procedure/view issues
 
-Ricky
+Rithvik Reddygari
 - Added dropdown menus for different attributes
 * Tested and fixed stored procedure/view issues
 
-Rithvik
+Rithvik Mattipalli
 - Added phase 3 stored procs and views logic (parameters) to UI
 * Tested and fixed stored procedure/view issues
